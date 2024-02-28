@@ -1,4 +1,4 @@
-resource_group_name = "az-900"
+resource_group_name = "az-800"
 virtual_network_name = "az-network"
 virtual_network_address_space = ["10.0.0.0/16"]
 subnet_name = "az-subnet"

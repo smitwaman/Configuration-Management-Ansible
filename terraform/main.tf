@@ -83,7 +83,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
     admin_ssh_key {
         username = "azureuser"
         
-        public_key = tls_private_key.az_ssh.public_key_openssh #The magic here
+        public_key = tls_public_key.az_ssh.public_key_openssh #The magic here
     }
 
     tags = {

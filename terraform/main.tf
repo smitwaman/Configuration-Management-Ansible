@@ -67,8 +67,15 @@ resource "tls_private_key" "az_ssh" {
 }
 
 resource "azurerm_linux_virtual_machine" "vm" {
-    computer_name = "myvm"
-    admin_username = "azureuser"
+  
+  name                = "ansible-demo"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  size                = var.vm_size
+  admin_username      = "adminuser"
+  network_interface_ids = [
+    azurerm_network_interface.netint.id,
+  ]
     disable_password_authentication = true
 
     admin_ssh_key {

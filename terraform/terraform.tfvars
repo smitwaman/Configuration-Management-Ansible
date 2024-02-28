@@ -9,5 +9,5 @@ network_interface_name = "az-nic"
 ip_configuration_name = "internal"
 vm_name = "ansible-demo"
 vm_size = "Standard B1s"
-vm_admin_username = "adminuser"
+vm_admin_username = "azureuser"
 

@@ -8,6 +8,6 @@ nsg_name = "az-nsg"
 network_interface_name = "az-nic"
 ip_configuration_name = "internal"
 vm_name = "ansible-demo"
-vm_size = "Standard B1s"
+vm_size = "Standard_B1s"
 vm_admin_username = "azureuser"
 

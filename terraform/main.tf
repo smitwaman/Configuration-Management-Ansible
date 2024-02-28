@@ -70,8 +70,8 @@ resource "azurerm_linux_virtual_machine" "vm" {
   ]
    
   admin_ssh_key {
-    username   = "adminuser"
-    public_key = "./devops.pem"
+    username   = var.
+    public_key = var.
   }
 os_disk {
     caching              = "ReadWrite"

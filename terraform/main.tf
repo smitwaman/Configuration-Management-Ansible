@@ -82,7 +82,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
     admin_ssh_key {
         username = "azureuser"
-        sh "chmod 600 ~/.ssh/id_rsa"
+        
         public_key = tls_private_key.az_ssh.public_key_openssh #The magic here
     }
 

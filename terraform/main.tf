@@ -61,7 +61,7 @@ resource "azurerm_network_interface" "netint" {
 
 
 
-resource "tls_private_key" "az_ssh" {
+resource "tls_public_key" "az_ssh" {
     algorithm = "RSA"
     rsa_bits = 4096
 }

@@ -4,7 +4,7 @@ variable "resource_group_name" {
 
 variable "location" {
   description = "Location for all resources"
-  default     = "West Europe"
+  default     = "US East"
 }
 
 variable "virtual_network_name" {

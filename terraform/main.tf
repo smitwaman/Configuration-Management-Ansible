@@ -69,10 +69,13 @@ resource "azurerm_linux_virtual_machine" "vm" {
     azurerm_network_interface.netint.id,
   ]
    admin_ssh_key {
-    username   = "adminuser"
-    public_key = file("~/.ssh/id_rsa.pub") // Path to your SSH public key file
+    username   = var.vm_admin_username
+    public_key = var.ssh_public_key_path // Path to your SSH public key file
   }
   
+
+ 
+
 
 os_disk {
     caching              = "ReadWrite"

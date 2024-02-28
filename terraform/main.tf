@@ -55,7 +55,7 @@ resource "azurerm_network_interface" "netint" {
     name                          = var.ip_configuration_name
     subnet_id                     = azurerm_subnet.subnet.id
     private_ip_address_allocation = var.private_ip_allocation
-    public_ip_address_id          = azurerm_public_ip.public.id
+    public_ip_address_id          = azurerm_public_ip.publicip.id
   }
 }
 

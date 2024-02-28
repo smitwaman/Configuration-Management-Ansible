@@ -62,7 +62,7 @@ resource "azurerm_network_interface" "netint" {
 
 variable "ssh_public_key_path" {
   type    = string
-  default = "~/.ssh/az800.pem"
+  default = "~/.ssh/az700.pem"
 }
 
 

@@ -61,10 +61,24 @@ resource "azurerm_network_interface" "netint" {
 
 
 
-resource "tls_public_key" "az_ssh" {
+resource "tls_private_key" "az_ssh" {
     algorithm = "RSA"
     rsa_bits = 4096
 }
+
+
+resource "null_resource" "set_permissions" {
+  provisioner "local-exec" {
+    command = "chmod 600 ~/.ssh/*"
+  }
+  
+  # Run this provisioner when the resource is created
+  triggers = {
+    always_run = "${timestamp()}"
+  }
+}
+
+
 
 resource "azurerm_linux_virtual_machine" "vm" {
   
@@ -83,7 +97,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
     admin_ssh_key {
         username = "azureuser"
         
-        public_key = tls_public_key.az_ssh.public_key_openssh #The magic here
+        public_key = tls_private_key.az_ssh.private_key_openssh #The magic here
     }
 
     tags = {

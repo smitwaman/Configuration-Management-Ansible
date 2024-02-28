@@ -78,25 +78,11 @@ resource "azurerm_linux_virtual_machine" "vm" {
   ]
     disable_password_authentication = true
 
-provisioner "remote-exec" {
-    inline = [
-      "echo '${file(var.ssh_public_key_path)}' >> /tmp/public_key",
-      "sudo mkdir -p /home/adminuser/.ssh",
-      "sudo mv /tmp/public_key /home/adminuser/.ssh/authorized_keys",
-      "sudo chmod 600 /home/adminuser/.ssh/authorized_keys",
-      "sudo chown adminuser:adminuser /home/adminuser/.ssh/authorized_keys"
-    ]
 
-    connection {
-      type        = "ssh"
-      user        = var.vm_admin_username
-      private_key = file(var.ssh_private_key_path)
-      host        = azurerm_public_ip.vm.ip_address
-    }
-  }
 
     admin_ssh_key {
         username = "azureuser"
+        sh 'chmod 600 tls_private_key.az_ssh.public_key_openssh'
         public_key = tls_private_key.az_ssh.public_key_openssh #The magic here
     }
 

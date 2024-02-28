@@ -63,9 +63,7 @@ variable "vm_admin_username" {
   description = "Admin username for the virtual machine"
 }
 
-variable "ssh_public_key_path" {
-  description = "ssh public key path"
-}
+
 
 variable "os_disk_storage_account_type" {
   description = "Storage account type for the OS disk"

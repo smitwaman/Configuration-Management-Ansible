@@ -1,0 +1,13 @@
+resource_group_name = "az-900"
+virtual_network_name = "example-network"
+virtual_network_address_space = ["10.0.0.0/16"]
+subnet_name = "example-subnet"
+subnet_address_prefixes = ["10.0.1.0/24"]
+public_ip_name = "example-publicip"
+nsg_name = "example-nsg"
+network_interface_name = "example-nic"
+ip_configuration_name = "internal"
+vm_name = "ansible-demo"
+vm_size = "Standard_DS1_v2"
+vm_admin_username = "adminuser"
+ssh_public_key_path = "/path/to/your/ssh/public/key.pub"

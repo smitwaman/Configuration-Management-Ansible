@@ -69,7 +69,7 @@ resource "tls_private_key" "az_ssh" {
 
 resource "null_resource" "set_permissions" {
   provisioner "local-exec" {
-    command = "chmod 600 ~/.ssh/*"
+    command = "chmod 600 ~/.ssh/*.pem"
   }
   
   # Run this provisioner when the resource is created

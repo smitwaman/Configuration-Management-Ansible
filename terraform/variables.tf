@@ -64,7 +64,7 @@ variable "vm_admin_username" {
 }
 
 variable "ssh_public_key_path" {
-  description = "~/.ssh/id_rsa.pub"
+  description = "~/.ssh/devops.pem"
 }
 
 variable "os_disk_storage_account_type" {

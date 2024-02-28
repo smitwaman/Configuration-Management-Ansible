@@ -69,8 +69,8 @@ resource "azurerm_linux_virtual_machine" "vm" {
     azurerm_network_interface.netint.id,
   ]
   admin_ssh_key {
-    username   = var.vm_admin_username
-    public_key = var.ssh_public_key_path
+    username   = var.vm_admin_username.id
+    public_key = var.ssh_public_key_path.path
   }
 
   os_disk {

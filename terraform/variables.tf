@@ -64,7 +64,7 @@ variable "vm_admin_username" {
 }
 
 variable "ssh_public_key_path" {
-  description = "Path to the SSH public key"
+  description = "~/.ssh/"
 }
 
 variable "os_disk_storage_account_type" {

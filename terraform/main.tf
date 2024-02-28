@@ -60,27 +60,26 @@ resource "azurerm_network_interface" "netint" {
 }
 
 
-variable "ssh_public_key_path" {
-  type    = string
-  default = "~/.ssh/az700.pem"
+
+resource "tls_private_key" "az_ssh" {
+    algorithm = "RSA"
+    rsa_bits = 4096
 }
 
-
-
 resource "azurerm_linux_virtual_machine" "vm" {
-  name                = var.vm_name
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
-  size                = var.vm_size
-  admin_username      = var.vm_admin_username
-  network_interface_ids = [
-    azurerm_network_interface.netint.id,
-  ]
-   
-  admin_ssh_key {
-    username   = "adminuser"
-    public_key = file(var.ssh_public_key_path)
-  }
+    computer_name = "myvm"
+    admin_username = "azureuser"
+    disable_password_authentication = true
+
+    admin_ssh_key {
+        username = "azureuser"
+        public_key = tls_private_key.az_ssh.public_key_openssh #The magic here
+    }
+
+    tags = {
+        environment = "Terraform Demo"
+    }
+
 os_disk {
     caching              = "ReadWrite"
     storage_account_type = var.os_disk_storage_account_type

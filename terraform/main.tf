@@ -59,6 +59,14 @@ resource "azurerm_network_interface" "netint" {
   }
 }
 
+
+variable "ssh_public_key_path" {
+  type    = string
+  default = "~/.ssh/az800.pem"
+}
+
+
+
 resource "azurerm_linux_virtual_machine" "vm" {
   name                = var.vm_name
   resource_group_name = azurerm_resource_group.rg.name

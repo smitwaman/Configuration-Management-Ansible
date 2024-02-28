@@ -70,8 +70,8 @@ resource "azurerm_linux_virtual_machine" "vm" {
   ]
    
   admin_ssh_key {
-    username   = var.vm_admin_username
-    public_key = file(["ssh_public_key_path"])
+    username   = "adminuser"
+    public_key = file(var.ssh_public_key_path)
   }
 os_disk {
     caching              = "ReadWrite"

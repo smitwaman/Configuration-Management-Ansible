@@ -25,6 +25,12 @@ resource "azurerm_public_ip" "test" {
   allocation_method       = "Static"
   idle_timeout_in_minutes = 30
   domain_name_label="dellemcappdemo"
+tags = {
+    Name = "MyNSG"
+    Environment = "Staging"
+    // Add other tags as needed
+  }
+
 }
 
 resource "azurerm_network_security_group" "test" {
@@ -45,6 +51,12 @@ resource "azurerm_network_security_rule" "test1" {
   destination_address_prefix  = "*"
   resource_group_name         = "${azurerm_resource_group.test.name}"
   network_security_group_name = "${azurerm_network_security_group.test.name}"
+tags = {
+    Name = "MyNSG"
+    Environment = "Production"
+    // Add other tags as needed
+  }
+
 }
 
 resource "azurerm_network_security_rule" "test2" {

@@ -1,14 +1,27 @@
 # Use an OpenJDK base image
-FROM openjdk:11-jdk-slim
+FROM maven:3.6.3-openjdk-11-slim AS build
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
 # Copy the source code from the host into the container
-COPY /src /usr/src/app/src
+COPY src/ /usr/src/app/src
+COPY pom.xml /usr/src/app
 
-# Compile the Java code
-RUN javac src/main/java/hello/Application.java
+# Resolve Maven dependencies and compile the Java code
+RUN mvn -B -f /usr/src/app/pom.xml clean package -DskipTests
 
-# Define the command to run your Java application when the container starts
-CMD ["java", "-cp", "src","main", "Application.java"]
+# Use a lightweight base image
+FROM openjdk:11-jre-slim
+
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Copy the compiled Java application from the build stage
+COPY --from=build /usr/src/app/target/your-spring-boot-app.jar /usr/src/app/your-spring-boot-app.jar
+
+# Expose the port the Spring Boot application will run on
+EXPOSE 8080
+
+# Define the command to run your Spring Boot application when the container starts
+CMD ["java", "-jar", "spring-boot-app.jar"]

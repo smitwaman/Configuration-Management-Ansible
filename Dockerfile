@@ -18,7 +18,7 @@ FROM openjdk:11-jre-slim
 WORKDIR /usr/src/app
 
 # Copy the compiled Java application from the build stage
-COPY --from=build /usr/src/app/target/spring-boot-app.jar /usr/src/app/spring-boot-app.jar
+COPY --from=build /usr/src/app/target/your-spring-boot-app.jar /usr/src/app/spring-boot-app.jar
 
 # Expose the port the Spring Boot application will run on
 EXPOSE 8080

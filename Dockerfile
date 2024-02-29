@@ -11,4 +11,4 @@ COPY src/ /usr/src/app/src
 RUN javac src/*.java
 
 # Define the command to run your Java application when the container starts
-CMD ["java", "-cp", "src", "MainClassName"]
+CMD ["java", "-cp", "src", "Application.java"]

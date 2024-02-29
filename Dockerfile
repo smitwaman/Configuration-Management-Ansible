@@ -11,14 +11,14 @@ COPY src ./src
 # Build the application
 RUN mvn clean package -DskipTests
 
-# Use AdoptOpenJDK as base image for runtime
-FROM adoptopenjdk/openjdk17:alpine-jre
+# Use OpenJDK Alpine as base image for runtime
+FROM openjdk:17-jdk-alpine
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
 # Copy the compiled JAR file from the build stage to the runtime image
-COPY --from=build /usr/src/app/target/springboot.jar ./app.jar
+COPY --from=build /usr/src/app/target/your-spring-boot-app.jar ./app.jar
 
 # Expose the port the Spring Boot application will listen on
 EXPOSE 8080

@@ -18,7 +18,7 @@ FROM openjdk:17-jdk-alpine
 WORKDIR /usr/src/app
 
 # Copy the compiled JAR file from the build stage to the runtime image
-COPY --from=build /usr/src/app/target/Application.jar ./app.jar
+COPY --from=build /usr/src/app/target/spring-boot-app.jar ./app.jar
 
 # Expose the port the Spring Boot application will listen on
 EXPOSE 8080

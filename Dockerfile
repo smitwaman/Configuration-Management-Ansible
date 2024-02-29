@@ -1,5 +1,5 @@
-# Use Maven to build the application
-FROM maven:3.8.3-openjdk-17 AS build
+# Use a Maven image to build the application
+FROM maven:3.8.3-openjdk-11 AS build
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -9,11 +9,10 @@ COPY pom.xml .
 COPY src ./src
 
 # Build the application
-RUN mvn clean package -X
+RUN mvn clean package -DskipTests
 
-
-# Use OpenJDK Alpine as base image for runtime
-FROM openjdk:17-jdk-alpine
+# Use a lightweight base image for runtime
+FROM adoptopenjdk/openjdk11:alpine-jre
 
 # Set the working directory in the container
 WORKDIR /usr/src/app

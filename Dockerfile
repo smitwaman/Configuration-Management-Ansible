@@ -9,7 +9,7 @@ COPY pom.xml .
 COPY src ./src
 
 # Build the application
-RUN mvn clean package -e
+RUN mvn clean build
 
 # Use OpenJDK Alpine as base image for runtime
 FROM openjdk:17-jdk-alpine

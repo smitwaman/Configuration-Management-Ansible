@@ -1,5 +1,5 @@
 # Use an OpenJDK base image
-FROM openjdk:11-jdk-slim AS build
+FROM maven:3.8.3-openjdk-17
 
 # Set the working directory in the container
 WORKDIR /usr/src/app

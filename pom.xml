@@ -1,47 +1,27 @@
+# Use a Maven image to build the application
+FROM maven:3.8.3-openjdk-11 AS build
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-         
-    <modelVersion>4.0.0</modelVersion>
-    
-    <groupId>com.springboot</groupId>
-    <artifactId>spring-boot-app</artifactId>
-    <version>1.0.0</version>
-    
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.3</version> <!-- Change this to match your Spring Boot version -->
-    </parent>
-    
-    <dependencies>
-        <!-- Spring Boot Starter Web dependency -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-    </dependencies>
-    
-    <build>
-        <plugins>
-            <!-- Maven compiler plugin configuration -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>11</source> <!-- Java version -->
-                    <target>11</target> <!-- Java version -->
-                </configuration>
-            </plugin>
-            
-            <!-- Spring Boot Maven plugin configuration -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-    
-</project>
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Copy the Maven project files
+COPY pom.xml .
+COPY src ./src
+
+# Build the application
+RUN mvn clean package -DskipTests
+
+# Use a lightweight base image for runtime
+FROM adoptopenjdk/openjdk11:alpine-jre
+
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Copy the compiled JAR file from the build stage to the runtime image
+COPY --from=build /usr/src/app/target/spring-boot-app.jar ./app.jar
+
+# Expose the port the Spring Boot application will listen on
+EXPOSE 8080
+
+# Define the command to run the application when the container starts
+CMD ["java", "-jar", "app.jar"]

@@ -14,5 +14,6 @@ RUN mvn clean package -DskipTests
 # Copy the JAR file from the build stage
 COPY --from=build /usr/src/app/target/springboot.jar ./app.jar
 
+
 # Define the command to run your Java application when the container starts
 CMD ["java", "-jar", "app.jar"]

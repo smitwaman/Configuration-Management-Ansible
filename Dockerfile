@@ -5,7 +5,7 @@ FROM openjdk:11-jdk-slim
 WORKDIR /usr/src/app
 
 # Copy the source code from the host into the container
-COPY /ansible/src /usr/src/app/src
+COPY /src /usr/src/app/src
 
 # Compile the Java code
 RUN javac /usr/src/app/src/java/hello/Application.java

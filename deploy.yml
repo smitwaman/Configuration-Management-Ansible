@@ -4,7 +4,7 @@
   become: true
   vars:
     git_repo_url: "https://github.com/smitwaman/ansible.git"
-    git_repo_path: "/home/ubuntu/sparx900/"
+    git_repo_path: "/home/ubuntu/sparx900/ansible"
     docker_container_name: "chatgpt_container"
     docker_image_name: "chatgpt_image"
     docker_image_tag: "latest"

@@ -4,18 +4,11 @@
   become: true
   vars:
     git_repo_url: "https://github.com/smitwaman/ansible.git"
-    git_repo_path: "https://github.com/smitwaman/ansible.git"
-  tasks:
-    - name: Clone Git repository
-      git:
-        repo: "{{ git_repo_url }}"
-        dest: "{{ git_repo_path }}"
-        clone: yes
 
     - name: Build Docker image
       docker_image:
         build:
-          path: "{{ git_repo_path }}"
-          dockerfile: "{{ git_repo_path }}/Dockerfile"
+          path: "{{ git_repo_url }}"
+          dockerfile: "{{ git_repo_url }}/Dockerfile"
         name: chatgpt
         tag: latest

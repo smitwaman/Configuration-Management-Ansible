@@ -1,5 +1,0 @@
-
-ansible-playbook -i hosts deploy.yml
-
-
-ssh -i ~/.ssh.devops.pem sparx900@20.51.189.73

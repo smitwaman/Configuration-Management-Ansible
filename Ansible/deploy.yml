@@ -1,0 +1,34 @@
+---
+- name: Deploy ChatGPT Docker Container from Git
+  hosts: app_servers
+  become: true
+  vars:
+    git_repo_url: "https://github.com/smitwaman/ansible.git"
+    git_repo_path: "/home/ubuntu/sparx900/ansible"
+    docker_container_name: "chatgpt_container"
+    docker_image_name: "chatgpt_image"
+    docker_image_tag: "latest"
+  tasks:
+    - name: Clone Git repository
+      git:
+        repo: "{{ git_repo_url }}"
+        dest: "{{ git_repo_path }}"
+        version: main
+        force: yes
+
+    - name: Build Docker image
+      docker_image:
+        build:
+          path: "{{ git_repo_path }}"
+          dockerfile: "{{ git_repo_path }}/Dockerfile"
+        name: "{{ docker_image_name }}"
+        tag: "{{ docker_image_tag }}"
+
+    - name: Run Docker container
+      docker_container:
+        name: "{{ docker_container_name }}"
+        image: "{{ docker_image_name }}:{{ docker_image_tag }}"
+        state: started
+        restart_policy: always
+        ports:
+          - "8080:8080"

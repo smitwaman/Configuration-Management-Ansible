@@ -4,7 +4,7 @@
   become: true
   vars:
     git_repo_url: "https://github.com/smitwaman/ansible.git"
-    git_repo_path: "home/ubuntu/sparx900/ansible"
+    git_repo_path: "/home/ubuntu/sparx900/ansible/"
   tasks:
     - name: Clone Git repository
       git:

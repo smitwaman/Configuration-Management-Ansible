@@ -1,13 +1,18 @@
-# You can change this base image to anything else
-# But make sure to use the correct version of Java
-FROM adoptopenjdk/openjdk11:alpine-jre
+# Use an official Nginx runtime as the base image
+FROM nginx:latest
 
-# Simply the artifact path
-ARG artifact=target/spring-boot-app.jar
+# Remove the default Nginx configuration file
+RUN rm /etc/nginx/conf.d/default.conf
 
-WORKDIR /usr/src/app
+# Copy the custom Nginx configuration file to replace the default one
+COPY nginx.conf /etc/nginx/conf.d/
 
-COPY ${artifact} app.jar
+# Copy the static files (e.g., HTML, CSS, JS) of your Java web application to the Nginx web root directory
+COPY src/ /usr/share/nginx/html/
 
-# This should not be changed
-ENTRYPOINT ["java","-jar","app.jar"]
+# Expose port 80 to allow external access
+EXPOSE 80
+
+# Command to start Nginx when the container is launched
+CMD ["nginx", "-g", "daemon off;"]
+

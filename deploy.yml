@@ -19,3 +19,12 @@
           dockerfile: "{{ git_repo_path }}/Dockerfile"
         name: chatgpt
         tag: latest
+
+     - name: Run Docker container
+       docker_container:
+        name: chatgpt_container
+        image: chatgpt:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "8082:8082"

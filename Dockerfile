@@ -10,7 +10,7 @@ COPY nginx.conf /etc/nginx/conf.d/
 # Copy the static files (e.g., HTML, CSS, JS) of your Java web application to the Nginx web root directory
 COPY src/ /usr/share/nginx/html/
 
-# Expose port 80 to allow external access
+# Expose port 8080 to allow external access
 EXPOSE 8080
 
 # Command to start Nginx when the container is launched

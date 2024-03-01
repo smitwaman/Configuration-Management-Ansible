@@ -1,11 +1,10 @@
 ---
 - name: Create Docker Image from Git Repository
-  hosts: your_host_server
+  hosts: app_servers
   become: true
   vars:
     git_repo_url: "https://github.com/smitwaman/ansible.git"
-    git_repo_path: "smitwaman/ansible.git"
-    target_dir: "/home/sparx900/chatgpt"
+    git_repo_path: "https://github.com/smitwaman/ansible.git"
   tasks:
     - name: Clone Git repository
       git:
@@ -13,16 +12,10 @@
         dest: "{{ git_repo_path }}"
         clone: yes
 
-    - name: Copy necessary files to target directory
-      copy:
-        src: "{{ git_repo_path }}/path/to/necessary/files"
-        dest: "{{ target_dir }}"
-        remote_src: yes
-
     - name: Build Docker image
       docker_image:
         build:
-          path: "{{ target_dir }}"
-          dockerfile: "{{ target_dir }}/Dockerfile"
+          path: "{{ git_repo_path }}"
+          dockerfile: "{{ git_repo_path }}/Dockerfile"
         name: chatgpt
         tag: latest
